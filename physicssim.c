@@ -3,6 +3,8 @@
 #include <math.h> 
 #include <unistd.h>  
 
+#define GRAVITY -9.8
+
 typedef struct{
 
   float x;
@@ -34,7 +36,7 @@ typedef struct {
   int num_springs;
   Particle *particles;
   Spring *springs;
-
+  
 } SoftBall;
 
 
@@ -42,14 +44,13 @@ int main()
 {
   int theta;            // makes easier for users to input something than asking i and j vector 
   float init_magnitude; // magnitude of the starting velocity vector
-                       
-  Particle particles[num_particles];
 
-  num_springs = (num_particles * 3)/2;
+  Softball ball;
+  ball.num_particles = 8;
+  ball.num_springs = 12;
 
-  Spring springs[num_springs];
-
- 
+  ball.particles = malloc(ball.num_particles * sizeof(Particle));
+  ball.springs = malloc(ball.num_springs * sizeof(Spring)); 
 
   while()
   {
@@ -58,7 +59,8 @@ int main()
       int j = (i+1)%(num_particles);
       int k = (i-1 + num_particles)%(num_particles);
       int l = (i+4)%(num_particles);
-      set_force(particles[i], particles[j], particles[k], particles[l], );        // setForce (add collision detection within)
+      
+      set_force(particles[i], particles[j], particles[k], particles[l]);        // setForce (add collision detection within)
       set_velocity();                                       // set velocity
       set_position();                                       // set position
      
@@ -74,16 +76,25 @@ int main()
                                                             // have some conditional end to break 
 
   }
-  
+  free(ball.particles);
+  free(ball.springs);
   return 0;
+
+}
+
+float env_force(Particle *p0)
+{
+
+   
 
 }
 
 float spring_force(Particle *p0, Particle *p1, Spring *s0)
 {
-
-  //calculate forces n stuff 
+  
+   
   // should just return the net force on p0 or the net force of each spring?
+
 }
 
 void sub_Vec(Vec2 *minuen, Vec2 *subtra)
