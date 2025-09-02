@@ -2,7 +2,7 @@
 #include <stdio.h> 
 #include <math.h> 
 
-void sub_Vec(Vec2 *minuen, Vec2 *subtra)
+void sub_Vec(Vec2 *minuen, Vec2 subtra)
 {
 
   &minuen->x -= (subtra->x);
@@ -10,24 +10,21 @@ void sub_Vec(Vec2 *minuen, Vec2 *subtra)
 
 }
 
-
-void add_Vec(Vec2 *minuen, Vec2 *subtra)
+void add_Vec(Vec2 *intial, Vec2 addend)
 {
 
-  &minuen->x += (subtra->x);
-  &minuen->y += (subtra->y);
+  &initial->x += (addend->x);
+  &initial->y += (addend->y);
 
 }
 
-void norm_Vec(Vec2 *v)
+void norm_Vec(Vec2 v, Vec2 *norm)
 {
 
-  float magnitude = (v->x)^2;
-  magnitude += (v->y)^2; 
-  magnitude = sqrt(magnitude);
+  float magnitude = magnitude_Vec(&v);
 
-  &v->x = (v->x) / magnitude;
-  &v->y = (v->y) / magnitude;
+  &norm->x = &(v->x) / magnitude;
+  &norm->y = &(v->y) / magnitude;
 
 }
 
@@ -53,7 +50,15 @@ void cross_Prod(Vec2 a, Vec2 b, Vec2 *c)
 
 }
 
+float magnitude_Vec(Vec2 a)
+{
 
+  float sum = 0.0;
+  sum += (a->x)^2;
+  sum += (a->y)^2;
+  sum = sqrt(sum);
+
+}
 
 // add functions for vector math, subtract add, length, normalize, etc.
 
